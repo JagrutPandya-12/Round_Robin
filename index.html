@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Round Robin CPU Scheduling Visualizer</title>
+    <link rel="stylesheet" href="style.css" />
+
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="card sidebar">
+            <h2>Round Robin Scheduler — Inputs</h2>
+            <div class="muted">All processes assumed to arrive at time 0. (Optional arrival times could be added.)</div>
+
+            <div style="margin-top:12px">
+                <label>Time Quantum (ms)</label>
+                <input id="quantum" type="number" value="3" min="1" />
+            </div>
+
+            <div style="margin-top:10px;display:flex;gap:8px">
+                <input id="pname" type="text" placeholder="Process name (e.g. P1)" />
+                <input id="pburst" type="number" placeholder="Burst" min="1" style="width:90px" />
+                <button id="addBtn">Add</button>
+            </div>
+
+            <div class="process-list" id="plist"></div>
+
+            <div style="display:flex;gap:8px;margin-top:10px">
+                <button id="random">Random 4</button>
+                <button id="clear" class="ghost">Clear</button>
+            </div>
+
+            <hr style="margin:12px 0;border:none;border-top:1px solid rgba(255,255,255,0.03)" />
+
+            <h2>Export & Guide</h2>
+            <div class="muted small">Download a screenshot or execution trace for submission.</div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+                <button id="exportPNG" class="ghost">Save Screenshot</button>
+                <button id="exportTrace">Save Trace</button>
+            </div>
+
+            <div style="margin-top:12px">
+                <button id="downloadAll" class="ghost">Download HTML (single-file)</button>
+            </div>
+
+            <footer class="note">Open this file locally in any modern browser (Chrome, Edge, Firefox). No server
+                required.
+            </footer>
+        </aside>
+
+        <!-- MAIN -->
+        <main>
+            <div class="card">
+                <div class="top-controls">
+                    <div style="flex:1">
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <button id="play">▶ Play</button>
+                            <button id="pause" class="ghost">⏸ Pause</button>
+                            <button id="stepF" class="ghost">⏭ Step</button>
+                            <button id="stepB" class="ghost">⏮ Back</button>
+                            <label class="muted" style="margin-left:12px">Speed</label>
+                            <input id="speed" type="range" min="0.25" max="3" step="0.25" value="1"
+                                style="width:160px;margin-left:6px" />
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:6px;align-items:center">
+                        <label class="muted small">Gantt / Timeline</label>
+                    </div>
+                </div>
+
+                <div class="canvas-wrap">
+                    <canvas id="canvas" width="900" height="320"></canvas>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <div class="muted small">Average Waiting Time</div>
+                        <div id="avgWaiting" style="font-weight:700;font-size:18px">-</div>
+                    </div>
+                    <div class="stat">
+                        <div class="muted small">Average Turnaround Time</div>
+                        <div id="avgTurn" style="font-weight:700;font-size:18px">-</div>
+                    </div>
+                    <div class="stat">
+                        <div class="muted small">Total CPU Time</div>
+                        <div id="totalTime" style="font-weight:700;font-size:18px">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:12px" class="card">
+                <h2>Execution Trace</h2>
+                <div id="traceBox"
+                    style="font-family:monospace;white-space:pre-wrap;max-height:220px;overflow:auto;padding:8px;background:rgba(255,255,255,0.01);border-radius:8px">
+                    No trace yet.</div>
+            </div>
+
+            <div style="margin-top:12px" class="card">
+                <h2>One-Page Execution Guide</h2>
+                <div style="margin-top:8px;line-height:1.4">
+                    <strong>Setup:</strong> Save this file as <code>index.html</code> and open in any modern browser. No
+                    server
+                    required.<br />
+                    <strong>Inputs:</strong> Add processes using the Name and Burst fields. Default arrival = 0. Set the
+                    Time
+                    Quantum (ms). Use Random to quickly add sample processes.<br />
+                    <strong>Controls:</strong> Play/Pause to animate. Step forward/backward to move between segments.
+                    Speed slider
+                    controls animation speed.<br />
+                    <strong>Visualization:</strong> Canvas shows a circular queue of process blocks and a Gantt-like
+                    timeline.
+                    Active process is highlighted and remaining bursts update in real-time.<br />
+                    <strong>Export:</strong> Save Screenshot to capture canvas; Save Trace downloads execution trace as
+                    JSON for
+                    submission.<br />
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
