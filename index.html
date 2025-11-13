@@ -12,18 +12,28 @@
         <!-- SIDEBAR -->
         <aside class="card sidebar">
             <h2>Round Robin Scheduler — Inputs</h2>
-            <div class="muted">All processes assumed to arrive at time 0. (Optional arrival times could be added.)</div>
+            <div class="muted">Add Arrival Time </div>
 
             <div style="margin-top:12px">
                 <label>Time Quantum (ms)</label>
                 <input id="quantum" type="number" value="3" min="1" />
             </div>
 
-            <div style="margin-top:10px;display:flex;gap:8px">
-                <input id="pname" type="text" placeholder="Process name (e.g. P1)" />
-                <input id="pburst" type="number" placeholder="Burst" min="1" style="width:90px" />
-                <button id="addBtn">Add</button>
+           <!-- Process Input Section -->
+            <div style="margin-top:12px;">
+                <label style="font-size:13px;color:var(--muted);display:block;margin-bottom:6px;">
+                    Add Process (Name, Burst, Arrival)
+                </label>
+  
+                <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+                    <input id="pname" type="text" placeholder="Name (e.g. P1)" style="flex:1;min-width:100px;" />
+                    <input id="pburst" type="number" placeholder="Burst" min="1" style="width:80px;" />
+                    <input id="parrival" type="number" placeholder="Arrival" min="0" style="width:80px;" />
+                    <button id="addBtn" style="flex-shrink:0;padding:8px 12px;">Add</button>
+                </div>
             </div>
+
+
 
             <div class="process-list" id="plist"></div>
 
